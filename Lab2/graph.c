@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "math.h"
 
+#define true 1;
+#define false 0;
+
 struct Graph {
     struct EdgeList *edgeList;
 };
@@ -45,9 +48,9 @@ int isEdgeExists(struct Graph *graph, struct Node *firstNode, struct Node *secon
         int localSecondNodeVValue = graph->edgeList[i].value->secondNode->number;
         if ((localFirstNodeValue == firstNodeValue || localFirstNodeValue == secondNodeValue)
             && (localSecondNodeVValue == firstNodeValue || localSecondNodeVValue == secondNodeValue))
-            return 1;
+            return true;
     }
-    return 0;
+    return false;
 }
 
 void addEdge(struct Graph *graph, int firstNodeNumber, int secondNodeNumber, int weight) {
