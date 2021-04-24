@@ -1,17 +1,38 @@
 #ifndef LOWLEVELPROGRAMMING2021_GRAPH_H
 #define LOWLEVELPROGRAMMING2021_GRAPH_H
 
-struct Graph;
-struct EdgeList;
-struct Edge;
-struct NodeList;
-struct Node;
+struct Graph {
+    struct EdgeList *edgeList;
+    struct NodeList *nodeList;
+};
+
+struct EdgeList {
+    int amount;
+    struct Edge *value;
+};
+
+struct Edge {
+    int weight;
+    struct Node *firstNode;
+    struct Node *secondNode;
+};
+
+struct NodeList {
+    int amount;
+    struct Node *value;
+};
+
+struct Node {
+    int number;
+};
 
 struct Node *createNode(struct Graph *graph, int number);
 
 struct Node *getNode(struct Graph *graph, int number);
 
 int isNodeExists(struct Graph *graph, int number);
+
+struct Edge *getEdge(struct Graph *graph, struct Node *firstNode, struct Node *secondNode);
 
 int isEdgeExists(struct Graph *graph, struct Node *firstNode, struct Node *secondNode);
 
