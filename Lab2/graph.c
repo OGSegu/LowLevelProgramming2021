@@ -141,7 +141,7 @@ int isEdgeExists(struct Graph *graph, struct Node *firstNode, struct Node *secon
         }
     }
 
-// Изменение значения вершины
+// Изменение значение вершины
     void changeValueOfNode(struct Graph *graph, int fromValue, int toValue) {
         if (isNodeExists(graph, toValue) == 1) {
             printf("Value %d already exists\n", toValue);
