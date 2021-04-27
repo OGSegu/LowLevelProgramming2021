@@ -26,6 +26,8 @@ struct Node {
     int number;
 };
 
+struct Graph *createGraph(int amountOfNode);
+
 struct Node *createNode(struct Graph *graph, int number);
 
 struct Node *getNode(struct Graph *graph, int number);
@@ -46,7 +48,10 @@ void removeEdge(struct Graph *graph, struct Node *firstNode, struct Node *second
 
 void printAllEdges(struct Graph *graph);
 
+void printAllEdgesToFile(struct Graph *graph, FILE *file);
+
 void changeValueOfNode(struct Graph *graph, int fromValue, int toValue);
 
 void changeWeightOfEdge(struct Graph *graph, struct Edge *edge, int newWeight);
+
 #endif //LOWLEVELPROGRAMMING2021_GRAPH_H

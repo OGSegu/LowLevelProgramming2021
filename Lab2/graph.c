@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "graph.h"
 #include "math.h"
-#include "test.h"
 
 struct Graph *createGraph(int amountOfNode) {
     struct Graph *graph = (struct Graph *) malloc(sizeof(struct Graph *));
@@ -70,106 +69,111 @@ int isEdgeExists(struct Graph *graph, struct Node *firstNode, struct Node *secon
 }
 
 // Создание вершины
-    struct Node *createNode(struct Graph *graph, int number) {
-        if (isNodeExists(graph, number) == 1) {
-            printf("Node is already exists");
-            return NULL;
-        }
-        struct Node *node = malloc(sizeof(struct Node));
-        node->number = number;
-        int amount = graph->nodeList->amount;
-        graph->nodeList[amount].value = node;
-        graph->nodeList->amount++;
-        return node;
+struct Node *createNode(struct Graph *graph, int number) {
+    if (isNodeExists(graph, number) == 1) {
+        printf("Node is already exists");
+        return NULL;
     }
+    struct Node *node = malloc(sizeof(struct Node));
+    node->number = number;
+    int amount = graph->nodeList->amount;
+    graph->nodeList[amount].value = node;
+    graph->nodeList->amount++;
+    return node;
+}
 
 // Удаление вершины
-    void removeNode(struct Graph *graph, int number) {
-        for (int i = 0; i < graph->nodeList->amount; i++) {
-            if (graph->nodeList[i].value->number == number) {
-                removeEdgeWithNode(graph, number);
-                alignNodeListAfterRemove(graph, i);
-                graph->nodeList->amount--;
-                return;
-            }
+void removeNode(struct Graph *graph, int number) {
+    for (int i = 0; i < graph->nodeList->amount; i++) {
+        if (graph->nodeList[i].value->number == number) {
+            removeEdgeWithNode(graph, number);
+            alignNodeListAfterRemove(graph, i);
+            graph->nodeList->amount--;
+            return;
         }
     }
+}
 
 // Вывести все вершины
-    void printAllNodes(struct Graph *graph) {
-        for (int i = 0; i < graph->nodeList->amount; i++) {
-            printf("Node %d: %d\n", i, graph->nodeList[i].value->number);
-        }
+void printAllNodes(struct Graph *graph) {
+    for (int i = 0; i < graph->nodeList->amount; i++) {
+        printf("Node %d: %d\n", i, graph->nodeList[i].value->number);
     }
+}
 
 // Создание ребра
-    struct Edge *createEdge(struct Graph *graph, struct Node *firstNode, struct Node *secondNode, int weight) {
-        if (isEdgeExists(graph, firstNode, secondNode) == 1) {
-            printf("Edge [%d, %d] already exists\n", firstNode->number, secondNode->number);
-            return NULL;
-        }
-        struct Edge *edge = malloc(sizeof(struct Edge));
-        edge->firstNode = firstNode;
-        edge->secondNode = secondNode;
-        edge->weight = weight;
-        int amount = graph->edgeList->amount;
-        graph->edgeList[amount].value = edge;
-        graph->edgeList->amount++;
-        return edge;
+struct Edge *createEdge(struct Graph *graph, struct Node *firstNode, struct Node *secondNode, int weight) {
+    if (isEdgeExists(graph, firstNode, secondNode) == 1) {
+        printf("Edge [%d, %d] already exists\n", firstNode->number, secondNode->number);
+        return NULL;
     }
+    struct Edge *edge = malloc(sizeof(struct Edge));
+    edge->firstNode = firstNode;
+    edge->secondNode = secondNode;
+    edge->weight = weight;
+    int amount = graph->edgeList->amount;
+    graph->edgeList[amount].value = edge;
+    graph->edgeList->amount++;
+    return edge;
+}
 
 // Удаление ребра
-    void removeEdge(struct Graph *graph, struct Node *firstNode, struct Node *secondNode) {
-        for (int i = 0; i < graph->edgeList->amount; i++) {
-            int localFirstNodeValue = graph->edgeList[i].value->firstNode->number;
-            int localSecondNodeVValue = graph->edgeList[i].value->secondNode->number;
-            if ((localFirstNodeValue == firstNode->number || localFirstNodeValue == secondNode->number)
-                && (localSecondNodeVValue == firstNode->number || localSecondNodeVValue == secondNode->number)) {
-                alignEdgeListAfterRemove(graph, i);
-                graph->edgeList->amount--;
-                return;
-            }
+void removeEdge(struct Graph *graph, struct Node *firstNode, struct Node *secondNode) {
+    for (int i = 0; i < graph->edgeList->amount; i++) {
+        int localFirstNodeValue = graph->edgeList[i].value->firstNode->number;
+        int localSecondNodeVValue = graph->edgeList[i].value->secondNode->number;
+        if ((localFirstNodeValue == firstNode->number || localFirstNodeValue == secondNode->number)
+            && (localSecondNodeVValue == firstNode->number || localSecondNodeVValue == secondNode->number)) {
+            alignEdgeListAfterRemove(graph, i);
+            graph->edgeList->amount--;
+            return;
         }
     }
+}
 
 // Вывести все ребра
-    void printAllEdges(struct Graph *graph) {
-        for (int i = 0; i < graph->edgeList->amount; i++) {
-            printf("[%d, %d] | Weight: %d\n", graph->edgeList[i].value->firstNode->number,
-                   graph->edgeList[i].value->secondNode->number,
-                   graph->edgeList[i].value->weight);
-        }
+void printAllEdges(struct Graph *graph) {
+    for (int i = 0; i < graph->edgeList->amount; i++) {
+        printf("[%d, %d] | Weight: %d\n", graph->edgeList[i].value->firstNode->number,
+               graph->edgeList[i].value->secondNode->number,
+               graph->edgeList[i].value->weight);
     }
+}
+
+// Записать все ребра в файл
+void printAllEdgesToFile(struct Graph *graph, FILE *file) {
+    for (int i = 0; i < graph->edgeList->amount; i++) {
+        fprintf(file, "[%d, %d] | Weight: %d\n", graph->edgeList[i].value->firstNode->number,
+                graph->edgeList[i].value->secondNode->number,
+                graph->edgeList[i].value->weight);
+    }
+    fclose(file);
+}
 
 // Изменение значение вершины
-    void changeValueOfNode(struct Graph *graph, int fromValue, int toValue) {
-        if (isNodeExists(graph, toValue) == 1) {
-            printf("Value %d already exists\n", toValue);
-            return;
-        }
-        for (int i = 0; i < graph->nodeList->amount; i++) {
-            if (graph->nodeList[i].value->number == fromValue)
-                graph->nodeList[i].value->number = toValue;
-        }
+void changeValueOfNode(struct Graph *graph, int fromValue, int toValue) {
+    if (isNodeExists(graph, toValue) == 1) {
+        printf("Value %d already exists\n", toValue);
+        return;
     }
-// Изменение веса ребра
-    void changeWeightOfEdge(struct Graph *graph, struct Edge *edge, int newWeight) {
-        if (isEdgeExists(graph, edge->firstNode, edge->secondNode) == 0) {
-            printf("Edge doesn't exist\n");
-            return;
-        }
-        for (int i = 0; i < graph->edgeList->amount; i++) {
-            if ((graph->edgeList[i].value->firstNode == edge->firstNode ||
-                 graph->edgeList[i].value->firstNode == edge->secondNode)
-                && (graph->edgeList[i].value->secondNode == edge->firstNode ||
-                    graph->edgeList[i].value->secondNode == edge->secondNode)) {
-                graph->edgeList[i].value->weight = newWeight;
-            }
-        }
+    for (int i = 0; i < graph->nodeList->amount; i++) {
+        if (graph->nodeList[i].value->number == fromValue)
+            graph->nodeList[i].value->number = toValue;
     }
+}
 
-    int main() {
-        int maxNodeAmount = 20;
-        struct Graph *graph = createGraph(maxNodeAmount);
-        runTests(graph);
+// Изменение веса ребра
+void changeWeightOfEdge(struct Graph *graph, struct Edge *edge, int newWeight) {
+    if (isEdgeExists(graph, edge->firstNode, edge->secondNode) == 0) {
+        printf("Edge doesn't exist\n");
+        return;
     }
+    for (int i = 0; i < graph->edgeList->amount; i++) {
+        if ((graph->edgeList[i].value->firstNode == edge->firstNode ||
+             graph->edgeList[i].value->firstNode == edge->secondNode)
+            && (graph->edgeList[i].value->secondNode == edge->firstNode ||
+                graph->edgeList[i].value->secondNode == edge->secondNode)) {
+            graph->edgeList[i].value->weight = newWeight;
+        }
+    }
+}
