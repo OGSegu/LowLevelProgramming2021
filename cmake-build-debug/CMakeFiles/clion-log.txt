@@ -1,4 +1,36 @@
-"C:\Program Files\JetBrains\CLion 2020.3.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" C:\Users\Vadim\CLionProjects\LowLevelProgramming2021
+"C:\Program Files\JetBrains\CLion 2020.3.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" C:\Users\Vadim\CLionProjects\LowLevelProgramming2021s
+-- The C compiler identification is GNU 8.1.0
+-- Check for working C compiler: C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/gcc.exe
+-- Check for working C compiler: C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/gcc.exe - works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
 -- Configuring done
--- Generating done
--- Build files have been written to: C:/Users/Vadim/CLionProjects/LowLevelProgramming2021/cmake-build-debug
+CMake Error at CMakeLists.txt:5 (add_library):
+  Cannot find source file:
+
+    Lab2/graph.c
+
+  Tried extensions .c .C .c++ .cc .cpp .cxx .cu .m .M .mm .h .hh .h++ .hm
+  .hpp .hxx .in .txx
+
+
+CMake Error at CMakeLists.txt:6 (add_executable):
+  Cannot find source file:
+
+    Lab2/main/main.c
+
+  Tried extensions .c .C .c++ .cc .cpp .cxx .cu .m .M .mm .h .hh .h++ .hm
+  .hpp .hxx .in .txx
+
+
+CMake Error at CMakeLists.txt:5 (add_library):
+  No SOURCES given to target: graph
+
+
+CMake Error at CMakeLists.txt:6 (add_executable):
+  No SOURCES given to target: LowLevelProgramming2021
+
+
+CMake Generate step failed.  Build files cannot be regenerated correctly.

@@ -1,4 +1,0 @@
-C:/Users/Vadim/CLionProjects/LowLevelProgramming2021/cmake-build-debug/CMakeFiles/graph.dir
-C:/Users/Vadim/CLionProjects/LowLevelProgramming2021/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-C:/Users/Vadim/CLionProjects/LowLevelProgramming2021/cmake-build-debug/CMakeFiles/LowLevelProgramming2021.dir
-C:/Users/Vadim/CLionProjects/LowLevelProgramming2021/cmake-build-debug/CMakeFiles/edit_cache.dir
