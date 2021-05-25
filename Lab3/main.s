@@ -7,7 +7,6 @@ la a3, array_length                             # загрузили адрес 
 lw a3, 0(a3) 					# загрузили длину массива в регистр a3 
 
 addi a3, a3, -1 				# n-1
-la a6, array 					# указатель
 li a2, 0  					# i - первый итератор = 0 
 
 loop1: 
@@ -23,7 +22,7 @@ loop1:
 		sw t3, 0(a6)			# свап двух элементов
 		sw t2, 4(a6) 
 		loop2_exit:
-			addi a6, a6, 4  	# указатель * 4 
+			addi a6, a6, 4  	# указатель + 4 
 			addi a4, a4, 1  	# второй итератор + 1 
 			bltu a4, a3, loop2    # if ( j < n-1) go to loop2
 		
